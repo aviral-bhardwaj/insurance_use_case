@@ -1,0 +1,42 @@
+{
+  "catalog": "insurance_command_center",
+  "schemas": {
+    "bronze": "bronze",
+    "silver": "silver",
+    "gold": "gold"
+  },
+  "data_paths": {
+    "base_path": "/data",
+    "members": "members.csv",
+    "claims": "claims.csv",
+    "call_center": "call_center.csv",
+    "digital_interactions": "digital_interactions.csv",
+    "surveys": "surveys.csv",
+    "pharmacy": "pharmacy.csv",
+    "enrollment": "enrollment.csv"
+  },
+  "cost_assumptions": {
+    "cost_per_call": 12.50,
+    "cost_per_minute": 0.75,
+    "digital_cost_per_interaction": 0.25
+  },
+  "business_rules": {
+    "leakage_window_hours": 24,
+    "repeat_call_window_days": 7,
+    "high_handle_time_threshold_minutes": 20,
+    "negative_sentiment_threshold": -0.5
+  },
+  "data_quality": {
+    "enable_deduplication": true,
+    "enable_null_handling": true,
+    "enable_referential_integrity": true,
+    "enable_schema_validation": true
+  },
+  "performance": {
+    "enable_caching": true,
+    "enable_partitioning": true,
+    "partition_columns": ["date", "plan_type"],
+    "optimize_write": true,
+    "enable_change_data_feed": true
+  }
+}
