@@ -1,17 +1,17 @@
 # Databricks notebook source
 # MAGIC %md
 # MAGIC # Gold Layer - Business Analytics Tables
-# MAGIC 
+# MAGIC
 # MAGIC This notebook creates business-ready analytics tables from the silver layer.
-# MAGIC 
+# MAGIC
 # MAGIC **Architecture:** Medallion - Gold Layer (Business Analytics)
-# MAGIC 
+# MAGIC
 # MAGIC **Purpose:**
 # MAGIC - Create aggregated business metrics
 # MAGIC - Build executive KPI dashboards
 # MAGIC - Enable self-service analytics
 # MAGIC - Support command center queries
-# MAGIC 
+# MAGIC
 # MAGIC **Gold Tables Created:**
 # MAGIC 1. `digital_call_leakage` - Digital failures that converted to calls
 # MAGIC 2. `repeat_calls_analysis` - Repeat call patterns with emotion tracking
@@ -33,7 +33,7 @@ from pyspark.sql.types import *
 from pyspark.sql.window import Window
 
 # Load configuration
-with open('/dbfs/FileStore/config/pipeline_config.json', 'r') as f:
+with open('/Volumes/insurance_command_center/default/data/config/pipeline_config.json', 'r') as f:
     config = json.load(f)
 
 # Notebook parameters
@@ -756,9 +756,9 @@ for table in gold_tables:
 
 # MAGIC %md
 # MAGIC ## Notebook Complete
-# MAGIC 
+# MAGIC
 # MAGIC ✅ Gold layer analytics complete!
-# MAGIC 
+# MAGIC
 # MAGIC **Next Steps:**
 # MAGIC 1. Run `04_command_center_dashboard.py` to execute executive queries
 # MAGIC 2. Create visualizations in Databricks SQL

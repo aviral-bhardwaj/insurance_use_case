@@ -1,18 +1,18 @@
 # Databricks notebook source
 # MAGIC %md
 # MAGIC # Silver Layer - Data Transformation and Quality
-# MAGIC 
+# MAGIC
 # MAGIC This notebook transforms bronze layer data into clean, business-ready silver tables.
-# MAGIC 
+# MAGIC
 # MAGIC **Architecture:** Medallion - Silver Layer (Clean Data)
-# MAGIC 
+# MAGIC
 # MAGIC **Purpose:**
 # MAGIC - Apply data quality transformations
 # MAGIC - Deduplicate records
 # MAGIC - Validate referential integrity
 # MAGIC - Enrich with business logic
 # MAGIC - Create journey linkages
-# MAGIC 
+# MAGIC
 # MAGIC **Transformations:**
 # MAGIC - Digital → Call leakage flagging (digital failure followed by call within 24 hours)
 # MAGIC - Repeat call detection (same member, same topic within 7 days)
@@ -34,7 +34,7 @@ from pyspark.sql.types import *
 from pyspark.sql.window import Window
 
 # Load configuration
-with open('/dbfs/FileStore/config/pipeline_config.json', 'r') as f:
+with open('/Volumes/insurance_command_center/default/data/config/pipeline_config.json', 'r') as f:
     config = json.load(f)
 
 # Notebook parameters
@@ -611,9 +611,9 @@ for table, zorder_cols in optimize_config.items():
 
 # MAGIC %md
 # MAGIC ## Notebook Complete
-# MAGIC 
+# MAGIC
 # MAGIC ✅ Silver layer transformation complete!
-# MAGIC 
+# MAGIC
 # MAGIC **Next Steps:**
 # MAGIC 1. Run `03_gold_analytics.py` to create business analytics tables
 # MAGIC 2. Review data quality metrics

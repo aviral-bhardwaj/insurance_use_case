@@ -1,17 +1,17 @@
 # Databricks notebook source
 # MAGIC %md
 # MAGIC # Bronze Layer - Raw Data Ingestion
-# MAGIC 
+# MAGIC
 # MAGIC This notebook ingests raw CSV files from the data folder into Unity Catalog bronze tables.
-# MAGIC 
+# MAGIC
 # MAGIC **Architecture:** Medallion - Bronze Layer (Raw Data)
-# MAGIC 
+# MAGIC
 # MAGIC **Purpose:**
 # MAGIC - Ingest all raw CSV files to Delta Lake tables
 # MAGIC - Preserve data exactly as received (no transformations)
 # MAGIC - Add metadata columns for lineage tracking
 # MAGIC - Handle incremental loads with merge logic
-# MAGIC 
+# MAGIC
 # MAGIC **Tables Created:**
 # MAGIC - `{catalog}.bronze.members_raw`
 # MAGIC - `{catalog}.bronze.claims_raw`
@@ -34,13 +34,13 @@ from pyspark.sql import functions as F
 from pyspark.sql.types import *
 
 # Load configuration
-with open('/dbfs/FileStore/config/pipeline_config.json', 'r') as f:
+with open('/Volumes/insurance_command_center/default/data/config/pipeline_config.json', 'r') as f:
     config = json.load(f)
 
 # Notebook parameters (can be overridden via dbutils.widgets)
 dbutils.widgets.text("catalog", config['catalog'], "Catalog Name")
 dbutils.widgets.text("bronze_schema", config['schemas']['bronze'], "Bronze Schema")
-dbutils.widgets.text("data_path", "/dbfs/FileStore/data", "Data Path")
+dbutils.widgets.text("data_path", "/Volumes/insurance_command_center/default/data", "Data Path")
 
 catalog = dbutils.widgets.get("catalog")
 bronze_schema = dbutils.widgets.get("bronze_schema")
@@ -399,9 +399,9 @@ print("💡 Tip: Uncomment permission grants when deploying to production")
 
 # MAGIC %md
 # MAGIC ## Notebook Complete
-# MAGIC 
+# MAGIC
 # MAGIC ✅ Bronze layer ingestion complete!
-# MAGIC 
+# MAGIC
 # MAGIC **Next Steps:**
 # MAGIC 1. Run `02_silver_transformation.py` to clean and enrich the data
 # MAGIC 2. Verify data quality in Unity Catalog

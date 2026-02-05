@@ -6,7 +6,7 @@
     "gold": "gold"
   },
   "data_paths": {
-    "base_path": "/data",
+    "base_path": "/Volumes/insurance_command_center/default/data/",
     "members": "members.csv",
     "claims": "claims.csv",
     "call_center": "call_center.csv",
