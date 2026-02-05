@@ -361,9 +361,12 @@ def transform_call_center(df):
         F.when(F.col("digital_timestamp").isNotNull(), True).otherwise(False)
     )
     
-    # Select final columns
+    # Select final columns - explicitly include member attributes from the earlier join
     df = df.select(
         F.col("calls.*"),
+        F.col("plan_type"),
+        F.col("segment"),
+        F.col("tenure_bucket"),
         F.col("failed_interaction_type")
     )
     
