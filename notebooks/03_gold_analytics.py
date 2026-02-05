@@ -152,9 +152,9 @@ def create_digital_call_leakage():
     # Filter to leakage calls
     leakage_df = calls_df.filter(F.col("is_digital_leakage") == True)
     
-    # Join with member details
+    # Join with member details (plan_type, segment, tenure_bucket already in call_center_clean)
     leakage_df = leakage_df.join(
-        members_df.select("member_id", "plan_type", "segment", "tenure_bucket", "age_group"),
+        members_df.select("member_id", "age_group"),
         "member_id",
         "left"
     )
@@ -217,9 +217,9 @@ def create_repeat_calls_analysis():
     calls_df = spark.table(f"{catalog}.{silver_schema}.call_center_clean")
     members_df = spark.table(f"{catalog}.{silver_schema}.members_clean")
     
-    # Join with member details
+    # Join with member details (plan_type, segment, tenure_bucket already in call_center_clean)
     calls_with_members = calls_df.join(
-        members_df.select("member_id", "plan_type", "segment", "tenure_bucket", "age_group"),
+        members_df.select("member_id", "age_group"),
         "member_id",
         "left"
     )
