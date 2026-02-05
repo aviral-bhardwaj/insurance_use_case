@@ -361,12 +361,12 @@ def transform_call_center(df):
         F.when(F.col("digital_timestamp").isNotNull(), True).otherwise(False)
     )
     
-    # Select final columns - explicitly include member attributes from the earlier join
+    # Select final columns
+    # calls.* already includes plan_type, segment, tenure_bucket from the earlier members join
+    # is_digital_leakage was added after the alias so must be selected explicitly
     df = df.select(
         F.col("calls.*"),
-        F.col("plan_type"),
-        F.col("segment"),
-        F.col("tenure_bucket"),
+        F.col("is_digital_leakage"),
         F.col("failed_interaction_type")
     )
     
